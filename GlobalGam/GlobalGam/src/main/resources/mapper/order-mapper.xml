@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.gam.mapper.OrderMapper">
+  
+  <!-- ResultMap 영역 -->
+  <resultMap type="com.gam.vo.OrderListViewVO"  id="orderAllList" >
+		<result property="orderNo" column="O_NO"/>
+		<result property="cuName" column="CU_NAME"/>
+		<result property="regDate" column="O_WRITE_DATE"/>
+		<result property="endDate" column="O_END_DATE"/>
+		<result property="count" column="DCOUNT"/>
+	</resultMap>
+	
+	  <resultMap type="com.gam.dto.CuCompanyDTO"  id="cuCompany" >
+		<result property="cuNo" column="CU_NO"/>
+		<result property="cuName" column="CU_NAME"/>
+		<result property="cuCeo" column="CU_CEO"/>
+		<result property="cuTel" column="CU_TEL"/>
+		<result property="cuFax" column="CU_FEX"/>
+		<result property="cuAddr" column="CU_ADDRESS"/>
+		<result property="cuEmp" column="CU_EM"/>
+		<result property="cuEmpTel" column="CU_EM_TEL"/>
+		<result property="cuEmail" column="CU_EMAIL"/>
+		<result property="cuEtc" column="CU_ETC"/>
+	</resultMap>
+	
+	  <resultMap type="com.gam.dto.OrderDTO"  id="order" >
+			<result property="orderNo" column="O_NO"/>
+			<result property="oderCuNo" column="O_CU_NO"/>
+			<result property="orderAddr" column="O_SEND_ADDRESS"/>
+			<result property="orderRegDate" column="O_WRITE_DATE"/>
+			<result property="orderEndDate" column="O_END_DATE"/>
+			<result property="orderPno" column="O_DE_P_NO"/>
+			<result property="orderCount" column="O_DE_COUNT"/>
+		</resultMap>
+		
+		<resultMap type="com.gam.dto.ProductDTO"  id="product" >
+			<result property="productNo" column="P_NO"/>
+			<result property="pName" column="P_NAME"/>
+			<result property="pSize" column="P_SIZE"/>
+			<result property="pPrice" column="P_PRICE"/>
+			<result property="pCount" column="p_count"/>
+			<result property="pDate" column="p_date"/>
+		</resultMap>
+		
+		  <!-- ResultMap 종료 -->
+		
+	
+	<!-- 수주 전체 목록 -->
+	<select id="orderList"  resultMap="orderAllList">
+		select o.o_no, c.cu_name,o.o_write_date, o.o_end_date , 
+		(select sum(od.o_de_count) from order_detail_tb od where od.o_de_no = o.o_no GROUP BY od.o_de_no) as dcount 
+		from order_tb o, cu_company_tb c
+		where o.o_cu_no = c.cu_no
+		order by o.o_write_date desc
+	</select>
+	
+	
+	<!-- 수주 키워드 검색 목록 -->
+	<select id="orderKeyList"  parameterType="java.lang.String" resultMap="orderAllList">
+	select o.o_no, c.cu_name,o.o_write_date, o.o_end_date , 
+  	  (select sum(od.o_de_count) 
+        	from order_detail_tb od where od.o_de_no = o.o_no GROUP BY od.o_de_no) as dcount 
+	from order_tb o, cu_company_tb c
+	where o.o_cu_no = c.cu_no
+	and c.cu_name LIKE '%'||#{searchKey}||'%'
+	order by o.o_write_date desc
+	</select>
+	
+	<!-- 수주 상세에서 고객사 정보 -->
+	<select id="selectOrderCu" parameterType="java.lang.String" resultMap="cuCompany">
+		select * from cu_company_tb where cu_no like #{cuNo}
+	</select>
+	
+	
+	<!-- 수주번호에 해당하는 수주+수주상세 테이블 데이터 조회 -->
+	<select id="selectOrderDetail" parameterType="java.lang.String" resultMap="order">
+			select o.*, od.o_de_p_no, od.o_de_count
+			from order_tb o, order_detail_tb od
+			where o.o_no = od.o_de_no
+			and o.o_no = #{s_no}
+	</select>
+	
+	<!-- 수주정보에 있는 완제품 정보 조회 -->
+	<select id="selectOrderProduct" parameterType="java.lang.String" resultMap="product">
+		select * from product_tb where p_no like #{proNo}
+	</select>
+	
+	<!-- 완제품 재고 정보 찾기 -->
+	<select id="selectProductStock" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select st_number from storage_tb where st_name like #{proNo}
+	</select>
+	
+	<!-- 수주테이블에 납기일자 수정 -->
+	<update id="updateEndDay" parameterType="java.util.Map" >
+		update order_tb set o_end_date = #{endDay} where o_no like #{orderNo}
+	</update>
+	
+	<!-- 수주상세 테이블에 수주수량 수정 -->
+	<update id="updateODquantity" parameterType="java.util.Map">
+		update order_detail_tb
+		set o_de_count = #{qua}
+		where
+		o_de_no like #{orderNo} and o_de_p_no like #{proNo}
+	</update>
+	
+	<!-- 완제품 목록 리스트 뽑기 -->
+	<select id="selectAllPro" resultMap="product">
+		select * from product_tb
+	</select>
+	
+	<insert id="insertProduct" parameterType="product">
+		insert into product_tb values(#{productNo}, #{pName}, #{pSize}, #{pPrice}, #{pCount}, #{pDate})
+	</insert>
+	
+	<select id="selectProductDetail" parameterType="String" resultMap="product">
+		select * from product_tb where p_no like #{p_no}
+	</select>
+	
+	<delete id="deleteProduct">
+		delete from product_tb where p_no like #{p_no}
+	</delete>
+	
+	<update id="updateProduct" parameterType="product">
+		update product_tb set p_name = #{pName}, p_size = #{pSize}, p_price = #{pPrice}, p_count = #{pCount}, p_date = #{pDate}
+		where p_no = #{productNo}
+	</update>
+	
+  	<select id="selectOurCom" resultType="mc">
+  		select * from my_company_tb
+  	</select>
+  	
+  	<update id="updateMyCompany" parameterType="mc">
+  		update my_company_tb set mc_name = #{mc_name}, mc_ceo = #{mc_ceo}, mc_tel = #{mc_tel},
+		mc_fax = #{mc_fax}, mc_em = #{mc_em}, mc_em_tel = #{mc_em_tel}, mc_email = #{mc_email},
+		mc_address = #{mc_address}, mc_bank = #{mc_bank}, mc_bank_num = #{mc_bank_num},
+		mc_bank_name = #{mc_bank_name} where mc_no like #{mc_no}
+  	</update>
+  </mapper>

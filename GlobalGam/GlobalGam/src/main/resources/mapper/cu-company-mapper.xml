@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.gam.mapper.CuCompanyMapper">
+ 
+ <!-- ResultMap 영역 -->
+   <resultMap type="com.gam.dto.CuCompanyDTO"  id="orderAllList" >
+		<result property="cuNo" column="CU_NO"/>
+		<result property="cuName" column="CU_NAME"/>
+		<result property="cuCeo" column="CU_CEO"/>
+		<result property="cuTel" column="CU_TEL"/>
+		<result property="cuFax" column="CU_FEX"/>
+		<result property="cuAddr" column="CU_ADDRESS"/>
+		<result property="cuEmp" column="CU_EM"/>
+		<result property="cuEmpTel" column="CU_EM_TEL"/>
+		<result property="cuEmail" column="CU_EMAIL"/>
+		<result property="cuEtc" column="CU_ETC"/>
+	</resultMap>
+	
+	<!-- ResultMap 종료 -->
+ 
+ 	<update id="updateCuEtc" parameterType="java.util.Map">
+ 		update cu_company_tb
+ 		set cu_etc = #{etc}
+ 		where cu_no like #{cuNo}
+ 	</update>
+ 
+  
+	<select id="selectAllCustomer" resultMap="orderAllList">
+		select * from cu_company_tb
+	</select>
+	
+	<select id="selectCustomer" parameterType="String" resultMap="orderAllList">
+	select * from cu_company_tb where cu_no like #{no}
+	</select>
+	<delete id="deleteCompany" parameterType="String">
+	delete from cu_company_tb where cu_no like #{cuNo}
+	</delete>
+	<update id="updateCompany" parameterType="CuCompanyDTO">
+	update cu_company_tb set cu_name = #{cuName}, cu_ceo = #{cuCeo}, cu_tel = #{cuTel}, cu_fex = #{cuFax}, cu_address = #{cuAddr},
+         cu_em = #{cuEmp}, cu_em_tel = #{cuEmpTel}, cu_email = #{cuEmail}, cu_etc = #{cuEtc}
+         where cu_no like #{cuNo}
+	</update>
+	
+	<insert id="insertCompany" parameterType="CuCompanyDTO">
+	insert into cu_company_tb(cu_no, cu_name, cu_ceo, cu_tel, cu_fex, cu_address, cu_em, cu_em_tel, cu_email, cu_etc)
+	values(#{cuNo}, #{cuName}, #{cuCeo}, #{cuTel}, #{cuFax}, #{cuAddr}, #{cuEmp}, #{cuEmpTel}, #{cuEmail}, #{cuEtc})
+	</insert>
+ 
+  </mapper>

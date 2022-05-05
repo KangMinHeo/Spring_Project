@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.gam.mapper.ForwardMapper">
+  	<select id="selectAllFor" resultType="for">
+  		select f.f_no, f.f_o_no, f.f_count, to_char(f.f_date, 'YYYY-MM-DD') as f_date, f.f_state,to_char(o.o_end_date, 'YYYY-MM-DD') as o_end_date, cu.cu_name, od.o_de_count, p.p_name, s.st_number
+		from forward_tb f, order_tb o, cu_company_tb cu, order_detail_tb od, product_tb p, storage_2_tb s
+		where f.f_o_no = o.o_no and o.o_cu_no = cu.cu_no
+		and o.o_no = od.o_de_no and od.o_de_p_no = p.p_no and p.p_no = s.st_name
+  	</select>
+  	
+  	<select id="selectForward" parameterType="Integer" resultType="for">
+  		select f.f_no, f.f_o_no, f.f_count, to_char(f.f_date, 'YYYY-MM-DD') as f_date, f.f_state, to_char(o.o_end_date, 'YYYY-MM-DD') as o_end_date , cu.cu_name, cu.cu_address, od.o_de_count, p.p_no, p.p_name, s.st_no, s.st_number
+		from forward_tb f, order_tb o, cu_company_tb cu, order_detail_tb od, product_tb p, storage_2_tb s
+		where f.f_no like #{f_no} and f.f_o_no = o.o_no and o.o_cu_no = cu.cu_no
+		and o.o_no = od.o_de_no and od.o_de_p_no = p.p_no and p.p_no = s.st_name
+  	</select>
+  	
+  	<update id="updateFor" parameterType="java.util.Map">
+  		update forward_tb set f_count = f_count + #{s_no}
+  		where f_no = #{f_no}
+  	</update>
+  	
+  	<update id="updateStorage" parameterType="java.util.Map">
+  		update storage_2_tb set st_number = st_number - #{s_no}
+  		where st_name = #{p_no}
+  	</update>
+  	
+  </mapper>

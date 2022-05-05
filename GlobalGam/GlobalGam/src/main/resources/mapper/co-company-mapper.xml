@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.gam.mapper.CoCompanyMapper">
+  	<select id="selectCompany" resultType="co_com">
+  		select * from co_company_tb
+  	</select>
+  	
+  	<select id="selectCompanyDetail" parameterType="String" resultType="co_com">
+  		select * from co_company_tb where co_no like #{no}
+  	</select>
+  	
+  	<update id="updateCompany" parameterType="co_com">
+  		update co_company_tb set co_name = #{co_name}, co_ceo = #{co_ceo},
+co_tel = #{co_tel}, co_fex = #{co_fex}, co_address = #{co_address},
+co_em = #{co_em}, co_em_tel = #{co_em_tel}, co_email = #{co_email}, co_etc = #{co_etc}
+  		where co_no like #{co_no}
+  	</update>
+  	
+  	<delete id="deleteCompany">
+  		delete from co_company_tb where co_no like #{co_no}
+  	</delete>
+  	
+  	<insert id="insertCompany" parameterType="co_com">
+  		insert into co_company_tb(co_no, co_name, co_ceo, co_tel,
+	co_fex, co_address, co_em, co_em_tel, co_email, co_etc)
+  		values (#{co_no}, #{co_name}, #{co_ceo}, #{co_tel},
+	#{co_fex}, #{co_address}, #{co_em}, #{co_em_tel}, #{co_email}, #{co_etc})
+  	</insert>
+  	
+  	<select id="selectMeterial" parameterType="String" resultType="met">
+  		select * from meterial_tb where m_cc_code like #{co_no}
+  	</select>
+  	
+  	<select id="selectAllMeterial" resultType="met">
+  		select m.*, c.co_name from meterial_tb m, co_company_tb c where m.m_cc_code like c.co_no
+  	</select>
+  	
+  	<select id="selectMeterialDetail" parameterType="String" resultType="met">
+  		select m.*, c.co_name from meterial_tb m, co_company_tb c where m.m_cc_code like c.co_no and m_no like #{m_no}
+  	</select>
+  	
+  	<update id="updateMeterial" parameterType="met">
+  		update meterial_tb set m_cc_code = #{m_cc_code},
+		m_name = #{m_name}, m_size = #{m_size}, m_count = #{m_count},
+  		 m_price = #{m_price}, m_date = #{m_date} where m_no like #{m_no}
+  	</update>
+  	
+  	<delete id="deleteMeterial">
+  		delete from meterial_tb where m_no like #{m_no}
+  	</delete>
+  	
+  	<insert id="insertMeterial" parameterType="met">
+  		insert into meterial_tb(m_no, m_cc_code, m_name, m_size, m_price, m_country, m_count, m_date)
+  		values (#{m_no}, #{m_cc_code}, #{m_name},
+  		#{m_size}, #{m_price}, #{m_country}, #{m_count}, #{m_date})
+  	</insert>
+  	
+  	<select id="selectAllRequest" resultType="req">
+  		select r.r_no, c.co_name, rd.r_de_m_no, m.m_name, r.r_write_date, r.r_end_date, rd.r_de_count
+		from request_tb r, request_detail_tb rd, co_company_tb c, meterial_tb m
+		where r.r_no = rd.r_de_no and r.r_co_no = c.co_no and m.m_no = rd.r_de_m_no
+		order by r.r_no desc
+  	</select>
+  	
+  	<select id="selectRequestDetail" parameterType="String" resultType="req">
+  		select r.r_no, c.co_name, r.r_write_date, r.r_end_date, e.e_name, c.co_address, e.e_no
+		from request_tb r, co_company_tb c, employee_tb e
+		where r.r_no like #{r_no} and r.r_co_no = c.co_no and r.r_e_no = e.e_no
+  	</select>
+  	
+  	<select id="selectRequestDetail2" parameterType="String" resultType="req">
+  		select rd.r_de_m_no, m.m_name, c.co_name, rd.r_de_count, m.m_price
+		from request_tb r, meterial_tb m, co_company_tb c, request_detail_tb rd
+		where r.r_no = #{r_no} and r.r_co_no = c.co_no and rd.r_de_m_no = m.m_no and r.r_no = rd.r_de_no
+  	</select>
+  	
+  	
+  	<update id="updateRequest1" parameterType="String">
+  		update request_tb set r_e_no = #{e_no} where r_no like #{r_no}
+  	</update>
+  	<update id="updateRequest2" parameterType="String">
+  		update request_detail_tb set r_de_count = #{r_de_count} where r_de_no like #{r_no}
+  	</update>
+  	
+  	<delete id="deleteRequest">
+  		delete from request_tb where r_no like #{r_no}
+  	</delete>
+  	
+  	<delete id="deleteRequest2">
+  		delete from request_detail_tb where r_de_no like #{r_no}
+  	</delete>
+  	
+  	<select id="selectRequestNo" resultType="String">
+  		select request_seq.nextval from dual
+  	</select>
+  	
+  	<insert id="insertRequest" parameterType="req">
+  		insert into request_tb(r_no, r_co_no, r_write_date, r_end_date, r_e_no)
+  		values (#{r_no}, #{cc_code}, #{wday}, #{eday}, #{e_no})
+  	</insert>
+  	
+  	<insert id="insertRequest2" parameterType="req">
+  		insert into request_detail_tb(r_de_no, r_de_m_no, r_de_count, r_de_price)
+  		values (#{r_no}, #{r_de_m_no}, #{r_de_count}, #{m_price})
+  	</insert>
+  	
+  	<select id="selectMaList" parameterType="String" resultType="req">
+  		select r.r_no, c.co_name, rd.r_de_m_no, m.m_name, r.r_write_date, r.r_end_date, rd.r_de_count
+		from request_tb r, request_detail_tb rd, co_company_tb c, meterial_tb m
+		where r.r_no = rd.r_de_no and r.r_co_no = c.co_no and m.m_no = rd.r_de_m_no
+		and c.co_name like '%'||#{searchKey}||'%'
+		order by r.r_no desc
+  	</select>
+  </mapper>

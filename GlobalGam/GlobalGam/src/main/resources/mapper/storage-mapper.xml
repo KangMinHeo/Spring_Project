@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.gam.mapper.StorageMapper">
+  	<select id="selectAllSto" resultType="sto">
+  		select s.st_kind, s.st_no, s.st_name,m.m_name, s.st_number
+		from storage_tb s, meterial_tb m
+		where s.st_name = m.m_no
+  	</select>
+  
+  	<select id="selectAllSto2" resultType="sto">
+	  	select s.st_kind, s.st_no, s.st_name, p.p_name, s.st_number
+		from storage_2_tb s, product_tb p
+		where s.st_name = p.p_no
+  	</select>
+  	
+  	<select id="selectStoDetail" parameterType="String" resultType="sto">
+  		select s.*,m.m_size, m.m_name,m.m_date,m.m_count, c.co_name from storage_tb s, meterial_tb m, co_company_tb c
+		where s.st_no = #{st_no} and s.st_name = m.m_no and m.m_cc_code = c.co_no
+  	</select>
+  	
+  	<select id="selectStoDetail2" parameterType="String" resultType="sto">
+  		select s.*,p.p_size, p.p_name,p.p_date,p.p_count
+		from storage_2_tb s, product_tb p
+		where s.st_no = #{st_no} and s.st_name = p.p_no
+  	</select>
+  	
+  	<delete id="deleteSto">
+  		delete from storage_tb where st_no like #{st_no}
+  	</delete>
+  	
+  	<delete id="deleteSto2">
+  		delete from storage_2_tb where st_no like #{st_no}
+  	</delete>
+</mapper>

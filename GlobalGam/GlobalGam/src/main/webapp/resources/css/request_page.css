@@ -1,0 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width: 100%;
+    margin: 0 auto;
+}
+
+h2{
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 20px;
+}
+
+p{
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.co_name, .co_em_name{
+    text-align: left;
+}
+
+.sign{
+    margin-left: 5%;
+}
+
+.request_table{
+    margin: 0 auto;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+}
+
+caption{
+    text-align: left;
+}
+
+tr, th, td{
+    border: 1px solid black;
+    height: 50px;
+}
+
+tr td:nth-of-type(1){
+    width: 10%;
+}
+
+tr td:nth-of-type(2){
+    width:30%;
+}
+
+tr td:nth-of-type(3), tr td:nth-of-type(4), tr td:nth-of-type(5), tr td:nth-of-type(6){
+	width: 10%;
+}
+
+.request_date{
+    letter-spacing: 10px;
+}
+
+@media print {
+	
+	/* 
+	header{
+		display:none;
+	}
+	*/
+	header h2{
+		font-size:24pt;
+	}
+	@page{
+		size:A4;
+		margin:20mm;
+	}
+/* 		table{
+			width: 10cm;
+		} */
+	
+	td{
+	text-align: center;}
+	
+}
