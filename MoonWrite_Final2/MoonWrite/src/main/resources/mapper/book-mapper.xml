@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="org.diary.moon.mapper.BookMapper">
+  	<insert id="insertBook" parameterType="book" >
+  		insert into book (bno,title, author, publisher, price, image, isbn, link, description)
+  		values(
+  			#{bno}, #{title}, #{author}, #{publisher}, #{price}, #{image}, #{isbn}, #{link}, #{description}
+  		)
+  	</insert>
+  	
+  	<select id="selectBnoBook" parameterType="int"  resultType="book">
+  		select * from book where bno =${bno} 
+  	</select>
+  	
+  	<delete id="deleteBook" parameterType="book" >
+  		delete from book where bno = #{bno}
+  	</delete>
+  	
+  </mapper>
+  

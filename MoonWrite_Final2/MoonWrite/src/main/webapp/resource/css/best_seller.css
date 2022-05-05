@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+body{
+	background-image: url("/resource/img/back-img.jpg");
+}
+
+.content{
+    width: 1200px;
+    margin: 0 auto;
+    margin-left: 400px;
+    margin-top: 30px;
+    text-align: center;
+    padding: 10px;
+}
+
+h1{
+    font-size: 50px;
+    margin-bottom: 50px;
+}
+
+.container{
+    width: 1200px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+.book{
+    width: 1200px;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 50px;
+}
+
+.book_commend{
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+img{
+    width: 120px;
+    height: 150px;
+}
+
+.book_commend p{
+    font-size: 20px;
+}
+
+.book_commend p:nth-child(2),
+.book_commend img{
+	cursor: pointer;
+	color: #ffe647;
+}

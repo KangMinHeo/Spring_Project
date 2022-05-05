@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.diary.moon.mapper.BoardMapper">
+
+<select id="selectBoardCount" resultType="int">
+	select count(*) from board_no_secret_list
+</select>
+
+<select id="selectPageBoard" resultType="board" parameterType="int">
+		select * from (
+		select ceil(rownum/7) as pageno, b.* from (
+		select*from board_no_secret_list order by bno desc) b)
+		where pageno= #{pageNo}
+</select>
+
+<select id="selectMyList" resultType="board" parameterType="java.util.Map">
+		select * from (
+		select ceil(rownum/7) as pageno, b.* from (
+		select * from (
+        select * from board_list where board_list.b_writer like #{b_writer} order by bno desc)) b)
+		where pageno= #{pageNo}
+</select>
+
+<select id="selectKind"  resultType="board" parameterType="java.util.Map">
+		
+		select * from (
+		select ceil(rownum/7) as pageno, b.* from (
+		select * from board_no_secret_list where b_kind = #{kind}
+		order by bno desc) b)
+		where pageno= #{page}
+</select>
+
+<select id="selectKindBoardCount" resultType="int" parameterType="java.lang.String">
+  	select count(*) from  board_no_secret_list where b_kind like #{kind}
+</select>
+
+<select id="selectKeywordBoardCount" resultType="int" parameterType="java.lang.String">
+	select count(*) from board_no_secret_list 
+	where content like '%' || #{keyword} || '%'
+	or title like  '%' || #{keyword} || '%'
+</select>
+
+<select id="selectKeyword" resultType="board" parameterType="java.util.Map">
+	select * from (
+		select ceil(rownum/7) as pageno, b.* from (
+		select * from board_no_secret_list
+		where content like '%' || #{keyword} || '%'
+		or title like  '%' || #{keyword} || '%'
+		order by bno desc) b)
+		where pageno= #{page}
+</select>
+
+<select id="selectBoard" parameterType="int" resultType="board">
+	select * from board_list where bno=#{bno}
+</select>
+
+
+<select id="selectBoardLikeCount" parameterType="int" resultType="int">
+	select count(*) from board_like where bno=#{bno}
+</select>
+
+
+<select id="selectUserLikeTrue" parameterType="java.util.Map"  resultType="int">
+	select count(*) from board_like
+	where m_id like #{m_id} and bno = #{bno} 
+</select>
+
+<insert id="insertBoardLike" parameterType="map">
+		insert into board_like values(#{m_id}, #{bno})
+</insert>
+
+<delete id="deleteBoardLike" parameterType="map">
+		delete from board_like where m_id like #{m_id} and bno = #{bno} 
+</delete>
+
+<insert id="insertBoard" parameterType="board" >
+	insert into board (title, content,b_kind, b_secret, book_name, b_writer) values
+	(#{title}, #{content}, #{b_kind}, #{b_secret}, #{book_name}, #{b_writer})
+</insert>
+
+<!-- 작성자 게시글에 맞는 페이지 개수 구하는 쿼리 -->
+	<select id="selectAllCount" resultType="int" parameterType="String">
+		select count(*) from board_list where b_writer = #{b_writer}
+	</select>
+
+	<!-- 내가 게시한 작성글만 보여주는 리스트 -->
+	<select id="selectList" resultType="board" parameterType="String">
+		select * from board_list where b_writer = #{b_writer}
+	</select>
+	
+	<update id="addCount" parameterType="int">
+		update board set b_count = b_count + 1 where bno = #{bno}
+	</update>
+	
+	<delete id="deleteBoard"  parameterType="int"  >
+		delete from board where bno = #{bno}
+	</delete>
+	
+	<update id="updateBoard" parameterType="board" >
+		update board
+		set
+		title = #{title},
+		content = #{content},
+		b_kind = #{b_kind}, b_secret = #{b_secret},
+		book_name = #{book_name}
+		where bno = #{bno}
+	</update>
+	
+	<select id="selectFindAllColums" parameterType="board" resultType="int">
+		select bno from board
+		where title like #{title} 
+		and content like #{content}
+		and book_name like #{book_name}	 
+	</select>
+	
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

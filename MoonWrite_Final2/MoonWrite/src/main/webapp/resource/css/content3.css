@@ -1,0 +1,267 @@
+@charset "UTF-8";
+/*폰트*/
+@import url('https://fonts.googleapis.com/earlyaccess/notosanskr.css"');
+@font-face {
+    font-family: 'Cafe24Ohsquareair';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/Cafe24Ohsquareair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    background-image: url("/resource/img/back-img.jpg");
+}
+
+.content {
+	width: 1200px;
+	text-align: left;
+	/*  border: 4px solid red;  */
+	margin-left: 400px; 
+}
+
+.content3-title{
+	height: 150px !important;
+	font-style: italic;
+	font-size: 40px;
+	margin-top: 100px;
+}
+
+.span-moon{
+	color: #ffe647;
+}
+
+.content3-table{
+	margin-top: 30px;
+	height: auto !important;
+	margin: 0 auto;
+	}
+
+.content3-table table{
+	width: 950px;
+	text-align: center;
+	margin-left: 30px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+
+th, td{
+	text-align: center;
+	padding: 10px 8px;
+}
+
+th{ /*수정코드*/
+	font-size: 24px;
+	color: white;
+	font-weight: normal;
+	/*background-color: rgba(255,255,198,0.7);*/
+	border-top: 3px solid #D17CE6;
+	border-bottom: 3px solid #D17CE6;
+}
+
+
+td{
+	font-size: 20px;
+	font-family: 'Cafe24Ohsquareair'; /*수정 코드*/
+    font-weight: normal;
+    font-style: normal;
+}
+
+tr th:first-child,
+tr td:first-child{
+	width: 30px;
+}
+
+tr th:nth-child(2),
+tr td:nth-child(2) {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 400px;
+}
+
+tr th:nth-child(3),
+tr td:nth-child(3) {
+	width: 150px;
+}
+
+tr th:nth-child(4),
+tr td:nth-child(4) {
+	width: 150px;
+}
+
+tr th:nth-child(5),
+tr td:nth-child(5) {
+	width: 75px;
+}
+
+td a:link,
+td a:visited{
+	text-decoration: none;
+	color: white;
+	font-family: 'Cafe24Ohsquareair';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.content3-ddMenu{
+	height: auto !important;
+	text-align: right;
+	margin-top: 50px; /*수정한 코드*/
+	margin-right: 200px;
+	margin-bottom: 10px;
+	padding: 0px 30px;
+}
+
+
+select {
+	text-align: center;
+	padding: 5px 2px;
+	font-family: monospace;
+	font-weight: 800;
+	line-height: 1.5;
+	background-color: #D5D5D5;
+	border: 2px solid white;
+	border-radius: 5px;
+	margin-right: 5px;
+}
+
+option{
+		font-family: monospace;
+		font-weight: 800;
+		background: #D5D5D5
+}
+
+.form-input{
+	font-size: 16px;
+	padding: 5px;
+	font-family: monospace;
+	border-radius: 5px;
+	vertical-align: middle; /*추가 코드*/
+}
+	
+/* 페이징 코드 */
+.pagging{
+	height: 60px !important;
+	width:950px;
+	padding: 0px 30px;
+	text-align: center;
+	font-size: 28px;	
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}ㄴ
+
+.pagging-search{
+	align-self: center;
+}
+
+.keyword{
+	font-family: monospace;
+	font-size: 16px;
+	padding: 5px 2px;
+}
+.pagging-btn-search{
+	font-family: monospace;
+	font-size: 16px;
+	font-weight: 800;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+
+	
+.pagging-no a:link,
+.pagging-no a:visited{
+	text-decoration: none;
+	color: white;
+}
+
+.selectPage{
+	font-family: 'Cafe24Ohsquareair'; /*수정 코드*/
+	color: #ffe647;
+}
+
+.pagging-no{
+	align-self: center;
+}
+
+
+.pagging-btn-write{
+	width: 100px;
+	height: 40px;
+	font-family: monospace;
+	font-size: 16px;
+	font-weight: 800;
+	padding: 1px 5px;
+	border-radius: 5px;
+   align-self: center;
+}
+/*
+	button:hover{
+		background-color: #ffe647;
+	}*/
+
+/*추가 영역 - 버튼 디자인 + 다른거*/
+	
+button,
+button::after {
+  -webkit-transition: all 0.3s;
+   -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+   transition: all 0.3s;
+}
+
+button {
+  background: none;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  color: #fff;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+button::before,
+button::after {
+  /*background: #fff;*/
+  /*background: #ffe647;*/
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+button:hover {
+  /*color: black;*/
+  border: 3px solid #153259;
+  border-radius: 5px;
+}
+	
+
+.form-input::after,
+.pagging-btn-search::after,
+.pagging-btn-write::after {
+    height: 0;
+    left: 50%;
+    top: 50%;
+    width: 0;
+}
+
+.form-input:hover:after,
+.pagging-btn-search:hover:after,
+.pagging-btn-write:hover:after {
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.pagging-saerch{
+	margin-left: 10px;
+}
+
+.pagging-search input{
+	border-radius: 5px;
+}
+

@@ -1,0 +1,281 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'KyoboHandwriting2020A';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/KyoboHandwriting2020A.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'KyoboHandwriting2020A';
+}
+
+body{
+	background-image: url("/resource/img/back-img.jpg");
+    background-color: #153259;
+    box-sizing: border-box;
+    color: white;
+    margin: 0 auto;
+    width: 1500px;
+    display: flex;
+    flex-direction: row;
+}
+/*
+.logo_menu{
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 50px;
+    position: fixed;
+    border: 1px solid yellow;
+    text-align: center;
+}
+
+.logo_menu header{
+    height: 300px;
+}
+
+.logo_menu nav{
+    top: 500px;
+    margin-top: 30px;
+}
+
+.logo_menu header img{
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 240px;
+    height: 240px;
+}
+
+.title{
+    text-align: center;
+    font-size: 30px;
+}
+
+ul, ol{list-style:none}
+ul{
+    display: flex;
+    flex-direction: column;
+}
+
+ul li a{
+    width: auto;
+}
+.header ul:after{
+	content:"";
+	display:block;
+	clear:both
+}
+.header ul li{
+	float:left;
+	border-left:1px solid rgba(255, 255, 255, 0);
+    box-sizing:border-box;
+    width:100%; 
+    margin-top: 50px;
+}
+.header ul li:first-child{
+	border-left:none;
+}
+.header ul li a{
+	display:block;
+	height:60px;
+	text-align:center;
+    line-height:60px;
+    font-size:20px;
+    text-decoration:none;
+    color:#fff;
+}
+
+.header ul li a:hover{
+    border-radius: 10px;
+    background-color: #ffe647;
+    color: black;
+    margin: 0 150px;
+}
+*/
+/* menu �쁺�뿭 �뿬湲곌퉴吏�*/
+
+.content{
+    width: 1200px;
+    margin: 0 auto;
+    margin-left: 400px;
+    margin-top: 50px;
+    text-align: center;
+    padding: 10px;
+    /*border: 1px solid red; /* �옉�뾽�븯�떎 �븣 �빐�떦 遺�遺꾩� 吏��슦怨� �븯�뀛�룄 �맗�땲�떎. */
+}
+
+/* �슦痢� �븯�떒�뿉 �엳�뒗 �쐞濡� �삱由щ뒗 踰꾪듉 */
+.btn_up{ 
+	top: 90%;
+	left: 90%;
+	width: 50px;
+	height: 50px;
+	border-radius: 80%;
+	background-color: #ffffff;
+	border: #ffe647 3px solid;
+	position: fixed;
+	color: white;
+	z-index: 2;
+}
+
+.btn_up:hover{
+	background-color: #153259;
+	color: #ffe647;
+}
+/* �슦痢� �븯�떒�뿉 �엳�뒗 �쐞濡� �삱由щ뒗 踰꾪듉 */
+
+.content1{
+    margin-top: 100px;
+}
+
+.content1 h1{
+    font-size: 60px;
+    color: #ffe647;
+    animation: backimage 5s ease 0s infinite alternate-reverse;
+}
+
+.content1 p{
+    margin-top: 20px;
+    font-size: 24px;
+    line-height: 60px;
+    animation-name: fade-in;
+    animation-duration: 10s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+.content2{
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.left_div img, .right_div img{
+    width: 240px;
+    height: 240px;
+}
+
+.left_div{
+	width: 300px;
+	height: 300px;
+    margin: 0 auto;
+}
+
+.right_div{
+	width: 300px;
+	height: 300px;
+    margin: 0 auto;
+}
+
+.content3{
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 100px;
+    padding: 50px;
+    /*border: 1px solid white;*/
+}
+
+.content3 h2{
+    font-size: 48px;
+    color: #ffe647;
+    margin-bottom: 25px;
+}
+
+.content3 p{
+    margin-top: 20px;
+    font-size: 24px;
+    line-height: 40px;
+}
+.commend{
+	margin-bottom: 50px;
+}
+.p_name{
+    float: right;
+}
+
+.content3 hr{
+	margin: 50px 0;
+}
+/* �븷�땲硫붿씠�뀡 �슚怨� css */
+@keyframes backimage {
+    from{ opacity: 1;}
+    to{ opacity: 0.4;}
+}
+
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fade-in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

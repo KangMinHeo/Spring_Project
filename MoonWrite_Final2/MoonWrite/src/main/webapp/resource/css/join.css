@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/earlyaccess/notosanskr.css"');
+
+*{
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    background-color: #153259;           
+}
+
+h1{
+  text-align: center;
+  margin-top: 150px;
+  margin-bottom: 8px;
+  color: yellow;
+  font-weight: bold;
+}
+.container{
+  width: 400px;
+  padding:20px;
+  margin:0 auto;
+  border: 1px solid #d1d1d1;
+  background-color: #EEEFF1;
+  border-radius: 5px;
+}
+#frm > ul{
+  list-style-type: none;
+  margin: 0;
+}
+
+#frm > ul > li{
+  margin-top: 10px;
+}
+
+button{
+  background-color: #c9c9c9;
+  color: white;
+}
+
+button:hover{
+  color: black;
+  background-color: #f6e271;
+  cursor: pointer;
+}
+
+#id, #pass, #pass_chk, #nick_name{
+  width: 220px;
+}
+
+#email{
+  width: 200px;
+}
+
+#class{
+    width: 35%;
+}
+label{
+  font-weight: bold;
+  font-size: 35px;
+}
+.border_bottom{
+  border: none;
+  background-color: white;
+  border-radius: 5px;
+}
+
+input:focus{
+  outline: 2px solid black;
+}
+
+input{
+  border:none;
+  outline : none;
+  height: 50px;
+  margin: 5px;
+  padding-left: 10px;
+
+}
+
+.sub_txt{
+  display: inline-block;
+  width: 20%;
+  text-align: right;
+  padding-right: 10px;
+  box-sizing: border-box;
+  font-weight: bold;
+  color: #EEEFF1;
+}
+
+select{
+  border: none;
+  background-color:#c9c9c9;
+  border-radius: 10px;
+  padding: 5px;
+  width: 20%;
+  font-size: 15px;
+  text-align: center;
+  color: black;
+}
+
+#tel{
+  padding-left: 10px;
+}
+
+.btn_next{
+  width: 150px;
+  height: 50px;
+  background-color: #c9c9c9;
+  color: white;
+  border-radius: 10px;
+  border:none;
+  margin: 0 auto;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.btn_id_chk, .btn_name_chk{
+  width: 122px;
+  height: 50px;
+  background-color: #c9c9c9;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.true{
+  font-weight: bold;
+  color:blue;
+}
+.false{
+  font-weight: bold;
+  color:red;
+}
+li{
+  display: flex;
+  flex-direction: row;
+}
+
+h2{
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  margin: 15px auto;
+}
+.border_bottom{
+  border: none;
+  border-radius: 5px;
+}
+.email_tag{
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
